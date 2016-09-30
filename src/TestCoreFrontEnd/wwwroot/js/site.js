@@ -112,29 +112,13 @@ function SendRequest(data, methodName, type) {
 
     jQuery.support.cors = true;
 
-    var req = new XMLHttpRequest();
-
-    req.onreadystatechange = function () {
-        if (req.readyState == 4) {
-
-            var resp = req.responseText;
-
-            if (resp != "" && resp != null)
-                alert(resp);
-
-        }
-
-    }
-
-
-
-    req.open(type, url + "/" + methodName, false);
-
-    req.setRequestHeader('Content-Type', 'application/json');
-
-
-
-    req.send(JSON.stringify(data));
+  var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        xhr.onerror = _handleError;
+        xhr.onload = _handleLoad;
+        xhr.open("GET", url + "/" + methodName, true);
+        xhr.send();
+    } 
 
 
 
