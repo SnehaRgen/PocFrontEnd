@@ -108,34 +108,28 @@ function DeleteEmployee(empId) {
     req.send(JSON.stringify(data));
 }
 
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    if ("withCredentials" in xhr) {
+function SendRequest(data, methodName, type) {
 
-        // Check if the XMLHttpRequest object has a "withCredentials" property.
-        // "withCredentials" only exists on XMLHTTPRequest2 objects.
-        xhr.open(method, url, true);
+    jQuery.support.cors = true;
 
-    } else if (typeof XDomainRequest != "undefined") {
+    var req = new XMLHttpRequest();
 
-        // Otherwise, check if XDomainRequest.
-        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
+    req.onreadystatechange = function () {
+        if (req.readyState == 4) {
 
-    } else {
+            var resp = req.responseText;
 
-        // Otherwise, CORS is not supported by the browser.
-        xhr = null;
+            if (resp != "" && resp != null)
+                alert(resp);
+
+        }
 
     }
-    return xhr;
-}
+    req.open(type, url + "/" + methodName, false);
 
-var xhr = createCORSRequest('GET', url);
-if (!xhr) {
-    throw new Error('CORS not supported');
-}
+    req.setRequestHeader('Content-Type', 'application/json');
+    req.send(JSON.stringify(data));
+ }
 
 
 function getParameterByName(name, url) {
