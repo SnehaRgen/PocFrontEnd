@@ -41,6 +41,7 @@ namespace TestCoreFrontEnd
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddMvc(options =>
             {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
                 options.FormatterMappings.GetMediaTypeMappingForFormat("json");
                 options.FormatterMappings.GetMediaTypeMappingForFormat("xml");
                 options.FormatterMappings.GetMediaTypeMappingForFormat("txt");
