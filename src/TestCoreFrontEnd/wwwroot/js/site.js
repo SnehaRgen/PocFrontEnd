@@ -163,7 +163,7 @@ function GetCall() {
         async: true,
         cache: false,
         type: 'GET',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function (data, textStatus, xhr) {
             bindHtml(data);
         },
