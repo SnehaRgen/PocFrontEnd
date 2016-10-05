@@ -112,23 +112,14 @@ function SendRequest(data, methodName, type) {
 
     jQuery.support.cors = true;
 
-    var req = new XMLHttpRequest();
-
-    req.onreadystatechange = function () {
-        if (req.readyState == 4) {
-
-            var resp = req.responseText;
-
-            if (resp != "" && resp != null)
-                alert(resp);
-
-        }
+     var req = new XMLHttpRequest();
+    req.open('GET', 'http://webapi-snehargen.cloudapps.click2cloud.org/api/Test/GetData', true);
+    req.onreadystatechange = function() {
+        alert(req.responseText);
+    };
+    req.send();
 
     }
-    req.open(type, url + "/" + methodName, false);
-
-    req.setRequestHeader('Content-Type', 'application/json');
-    req.send(JSON.stringify(data));
  }
 
 
